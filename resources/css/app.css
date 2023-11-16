@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    @apply relative min-h-screen text-neutral-800;
+    font-family: 'Manrope', sans-serif;
+}
+
+.navigation {
+    @apply bg-gray-100 shadow;
+}
+
+.navigation__wrapper {
+    @apply flex items-center justify-evenly;
+}
+
+.navigation__logo {
+    @apply hover:bg-neutral-200 rounded-md transition-all duration-100 px-3 py-1;
+}
+
+.navigation__menu {
+    @apply flex relative;
+}
+
+.navigation__menu-button {
+    @apply flex w-10 h-10 items-center justify-center cursor-pointer hover:bg-neutral-200 transition-all duration-200 rounded-md;
+}
+
+.navigation__menu-content {
+    @apply opacity-0 absolute left-0 top-10 w-80 rounded-md border bg-white shadow-md z-50;
+}
+
+.navigation__menu-content.active {
+    @apply opacity-100;
+}
+
+
+.navigation__menu_item-wrapper {
+    @apply flex p-2;
+}
+
+.navigation__menu-item {
+    @apply px-4 w-screen py-2 rounded-md bg-neutral-100 hover:bg-neutral-200 transition-all duration-100;
+}
+
+.navigation__content {
+    @apply container flex h-16 justify-center items-center;
+}
+
+.navigation__links-wrapper {
+    @apply flex items-center justify-between w-96;
+}
+
+.navigation__link {
+    @apply px-3 py-1 rounded-md hover:bg-neutral-200 transition-all duration-100;
+}
+
+.breadcrumb__separator {
+    @apply pointer-events-none mx-2 select-none font-sans text-sm font-normal leading-normal antialiased;
+}
+
+.button {
+    @apply rounded-md transition-all duration-100 px-4 py-2 shadow-md text-sm;
+}
+
+.button-tertiary {
+    @apply hover:bg-gray-100 shadow-none;
+}
+
+.button-dark {
+    @apply bg-gray-600 text-white hover:bg-gray-700 shadow-gray-500/25;
+}
+
+.button-primary {
+    @apply bg-blue-600 text-white hover:bg-blue-700 shadow-blue-500/25;
+}
+
+.button-warning {
+    @apply bg-yellow-500 hover:bg-yellow-600 shadow-yellow-500/25;
+}
+
+.button-danger {
+    @apply bg-red-500 text-white hover:bg-red-800 shadow-red-500/25;
+}
+
+.button-secondary {
+    @apply hover:bg-gray-200 shadow-gray-700/10;
+}
+
+.button-dark-secondary {
+    @apply hover:bg-gray-600 hover:text-white shadow-gray-500/20;
+}
+
+.button-primary-secondary {
+    @apply hover:bg-blue-600 hover:text-white shadow-blue-500/20;
+}
+
+.button-warning-secondary {
+    @apply hover:bg-yellow-600 shadow-yellow-500/20;
+}
+
+.button-danger-secondary {
+    @apply hover:bg-red-600 hover:text-white shadow-red-500/20;
+}
+
+.form-container {
+    @apply bg-gray-100 rounded-xl p-6 shadow;
+}
+
+.navigation__profile {
+    @apply w-10 h-10;
+}
+
+.content {
+    @apply container mx-auto min-h-screen bg-white rounded-md p-6 shadow-md mb-12;
+}
+
+.table__head {
+    @apply bg-neutral-700;
+}
+
+.table__head th {
+    @apply px-6 py-3 text-xs font-bold text-neutral-100 uppercase;
+}
+
+.table__body {
+    @apply divide-y divide-gray-700;
+}
+
+.table__body-element {
+    @apply px-6 py-2 whitespace-nowrap text-sm text-neutral-800;
+}
+
+.form-group {
+    @apply flex gap-2 mb-2;
+}
+
+.form-input {
+    @apply outline-0 p-1 rounded-md w-full;
+}
+
+.form-input__label {
+    @apply flex text-sm ms-1 mb-1.5;
+}
+
+.form-input__input {
+    @apply outline-0 px-3 py-1.5 rounded-md shadow-sm w-full;
+}
+
+.form-input__error {
+    @apply text-sm text-red-500 mt-1 ml-1;
+}
+
+.form__select {
+    @apply w-full py-1.5 px-2 shadow-sm bg-white rounded-md outline-0;
+}
+
+.card-container {
+    @apply bg-gray-100 rounded-xl p-6 shadow w-full;
+}
+
+.footer {
+    @apply border-t-4 bg-gray-100 sticky top-full;
+}
+
+.footer__wrapper {
+    @apply container mx-auto flex h-16 justify-between items-center;
+}
