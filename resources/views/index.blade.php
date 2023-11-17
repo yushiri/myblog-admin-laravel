@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('this_page')
-    Главная
-@endsection
-
 @section('content')
     <div class="content">
         <div>

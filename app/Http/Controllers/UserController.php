@@ -63,4 +63,17 @@ class UserController extends Controller
         $user->delete();
         return redirect()->route('users.index');
     }
+
+    public function profile(User $user)
+    {
+        return view('user.profile', compact('user'));
+    }
+
+    public function profile_edit(UpdateRequest $request)
+    {
+        $user = auth()->user();
+        $data = $request->validated();
+        $user->update($data);
+        return redirect()->route('users.profile.edit');
+    }
 }

@@ -121,7 +121,7 @@
                                    name="password_confirmation"
                                    id="password_confirmation"
                                    type="password"
-                                   placeholder="Подтвержение пароля">
+                                   placeholder="Подтверждение пароля">
                             @error('password_confirmation')
                             <div class="form-input__error">
                                 {{ $message }}

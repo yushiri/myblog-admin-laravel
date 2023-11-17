@@ -13,6 +13,10 @@ Breadcrumbs::for('index', function (BreadcrumbTrail $trail) {
     $trail->push('Главная', route('index'));
 });
 
+Breadcrumbs::for('users.profile.index', function (BreadcrumbTrail $trail, User $user) {
+    $trail->push('Профиль пользователя ' . $user->name, route('users.show', $user));
+});
+
 Breadcrumbs::for('users.index', function (BreadcrumbTrail $trail) {
     $trail->parent('index');
     $trail->push('Пользователи', route('users.index'));
@@ -30,5 +34,5 @@ Breadcrumbs::for('users.show', function (BreadcrumbTrail $trail, User $user) {
 
 Breadcrumbs::for('users.edit', function (BreadcrumbTrail $trail, User $user) {
     $trail->parent('users.index');
-    $trail->push('Редактирование пользователя ' . $user->name, route('users.edit', $user));
+    $trail->push('Редактирование пользователя' . $user->name, route('users.edit', $user));
 });

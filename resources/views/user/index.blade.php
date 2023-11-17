@@ -33,7 +33,7 @@
                                         {{ $user->name }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $user->email }}
+                                        {{ $user->surname }}
                                     </td>
                                     <td class="table__body-element">
                                         {{ $user->role == 1 ? 'guest' ?? $user->role == 2 : 'admin' }}

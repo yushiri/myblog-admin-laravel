@@ -26,15 +26,15 @@ body {
 }
 
 .navigation__menu-button {
-    @apply flex w-10 h-10 items-center justify-center cursor-pointer hover:bg-neutral-200 transition-all duration-200 rounded-md;
+    @apply flex w-8 h-8 items-center justify-center cursor-pointer hover:bg-neutral-200 transform transition-all duration-200 rounded-md;
 }
 
 .navigation__menu-content {
-    @apply opacity-0 absolute left-0 top-10 w-80 rounded-md border bg-white shadow-md z-50;
+    @apply opacity-0 absolute left-0 top-10 w-80 rounded-md border bg-white shadow-md z-50 scale-50;
 }
 
 .navigation__menu-content.active {
-    @apply opacity-100;
+    @apply opacity-100 scale-100 duration-100;
 }
 
 
@@ -112,6 +112,14 @@ body {
 
 .navigation__profile {
     @apply w-10 h-10;
+}
+
+.navigation__profile_menu {
+    @apply opacity-0 absolute right-0 top-16 w-40 rounded-md border bg-white shadow-md z-50 scale-50;
+}
+
+.navigation__profile_menu.active {
+    @apply opacity-100 scale-100 duration-100;
 }
 
 .content {
