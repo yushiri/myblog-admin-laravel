@@ -10,21 +10,21 @@ use Diglactic\Breadcrumbs\Breadcrumbs;
 use Diglactic\Breadcrumbs\Generator as BreadcrumbTrail;
 
 Breadcrumbs::for('index', function (BreadcrumbTrail $trail) {
-    $trail->push('Главная', route('index'));
+    $trail->push('Home', route('index'));
 });
 
 Breadcrumbs::for('users.profile.index', function (BreadcrumbTrail $trail, User $user) {
-    $trail->push('Профиль пользователя ' . $user->name, route('users.show', $user));
+    $trail->push('User profile ' . ucfirst($user->name), route('users.show', $user));
 });
 
 Breadcrumbs::for('users.index', function (BreadcrumbTrail $trail) {
     $trail->parent('index');
-    $trail->push('Пользователи', route('users.index'));
+    $trail->push('Users', route('users.index'));
 });
 
 Breadcrumbs::for('users.create', function (BreadcrumbTrail $trail) {
     $trail->parent('users.index');
-    $trail->push('Добавление пользователя', route('users.create'));
+    $trail->push('Create', route('users.create'));
 });
 
 Breadcrumbs::for('users.show', function (BreadcrumbTrail $trail, User $user) {
@@ -34,5 +34,5 @@ Breadcrumbs::for('users.show', function (BreadcrumbTrail $trail, User $user) {
 
 Breadcrumbs::for('users.edit', function (BreadcrumbTrail $trail, User $user) {
     $trail->parent('users.index');
-    $trail->push('Редактирование пользователя' . $user->name, route('users.edit', $user));
+    $trail->push('Edit ' . $user->name, route('users.edit', $user));
 });

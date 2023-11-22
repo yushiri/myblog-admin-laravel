@@ -4,7 +4,7 @@
     <div class="content">
         <div class="flex justify-end mb-6">
             <a href="{{ route('users.create') }}" class="button button-primary">
-                Добавить пользователя
+                Add User
             </a>
         </div>
         <div class="flex flex-col">
@@ -15,12 +15,12 @@
                             <thead class="table__head bg-neutral-600">
                             <tr>
                                 <th class="text-left">ID</th>
-                                <th class="text-left">Имя</th>
-                                <th class="text-left">Почта</th>
-                                <th class="text-left">Роль</th>
-                                <th class="text-left">Дата создания</th>
-                                <th class="text-left">Дата обновления</th>
-                                <th class="text-right">Действия</th>
+                                <th class="text-left">Name</th>
+                                <th class="text-left">Email</th>
+                                <th class="text-left">Role</th>
+                                <th class="text-left">Created Date</th>
+                                <th class="text-left">Updated Date</th>
+                                <th class="text-right">Actions</th>
                             </tr>
                             </thead>
                             <tbody class="table__body">
@@ -30,10 +30,10 @@
                                         {{ $user->id }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $user->name }}
+                                        {{ $user->full_name }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $user->surname }}
+                                        {{ $user->email }}
                                     </td>
                                     <td class="table__body-element">
                                         {{ $user->role == 1 ? 'guest' ?? $user->role == 2 : 'admin' }}

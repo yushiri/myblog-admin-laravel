@@ -62,27 +62,27 @@
                     <ul>
                         <li class="navigation__menu_item-wrapper">
                             <a href="{{ route('index') }}" class="navigation__menu-item">
-                                Главная
+                                Home
                             </a>
                         </li>
                         <li class="navigation__menu_item-wrapper">
                             <a href="{{ route('users.index') }}" class="navigation__menu-item">
-                                Пользователи
+                                Users
                             </a>
                         </li>
                         <li class="navigation__menu_item-wrapper">
                             <a href="#" class="navigation__menu-item">
-                                Категории
+                                Categories
                             </a>
                         </li>
                         <li class="navigation__menu_item-wrapper">
                             <a href="#" class="navigation__menu-item">
-                                Теги
+                                Tags
                             </a>
                         </li>
                         <li class="navigation__menu_item-wrapper">
                             <a href="#" class="navigation__menu-item">
-                                Посты
+                                Post
                             </a>
                         </li>
                     </ul>
@@ -92,13 +92,13 @@
 
         <div class="navigation__content">
             <div class="navigation__links-wrapper">
-                <a href="#" class="navigation__link font-sans font-bold">
+                <a href="#" class="navigation__link font-bold">
                     Blog
                 </a>
-                <a href="{{ route('index') }}" class="navigation__link font-sans font-bold text-xl">
+                <a href="{{ route('index') }}" class="navigation__link font-bold">
                     Home
                 </a>
-                <a href="#" class="navigation__link font-sans font-bold">
+                <a href="#" class="navigation__link font-bold">
                     About Us
                 </a>
             </div>
@@ -110,19 +110,20 @@
         @endguest
         @auth()
             <div class="navigation__profile">
-                <div class="cursor-pointer hover:scale-105" data-toggle="userMenu">
-                    <img src="{{ asset(auth()->user()->avatar_image) }}" alt="profile_icon">
+                <div class="navigation__profile__avatar" data-toggle="userMenu"
+                     style="background-image: url('{{ asset(auth()->user()->avatar_image) }}');">
                 </div>
                 <div class="navigation__profile_menu" style="display: none" id="userMenu">
                     <ul>
                         <li class="navigation__menu_item-wrapper">
-                            <a href="{{ route('users.profile.index', [auth()->user()]) }}" class="navigation__menu-item">
-                                Профиль
+                            <a href="{{ route('users.profile.index', [auth()->user()]) }}"
+                               class="navigation__menu-item">
+                                Profile
                             </a>
                         </li>
                         <li class="navigation__menu_item-wrapper">
                             <a href="{{ route('logout') }}" class="navigation__menu-item text-red-500">
-                                Выйти
+                                Logout
                             </a>
                         </li>
                     </ul>

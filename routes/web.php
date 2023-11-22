@@ -16,23 +16,26 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'index')->name('index');
+Route::group(['prefix' => '/', 'middleware' => ['setup', 'auth', 'admin']], function () {
 
-Route::group(['prefix' => '/users', 'as' => 'users.', 'middleware' => ['auth', 'admin']], function () {
-    Route::get('/', [UserController::class, 'index'])->name('index');
-    Route::get('/create', [UserController::class, 'create'])->name('create');
-    Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
-    Route::get('/show/{user}', [UserController::class, 'show'])->name('show');
-    Route::post('/store', [UserController::class, 'store'])->name('store');
-    Route::patch('/update/{user}', [UserController::class, 'update'])->name('update');
-    Route::get('/destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
+    Route::view('/', 'index')->name('index');
 
-    Route::group(['prefix' => '/profile', 'as' => 'profile.'], function () {
-        Route::get('/{user}', [UserController::class, 'profile'])->name('index');
-        Route::get('/edit/{user}', [UserController::class, 'profile_edit'])->name('edit');
+    Route::group(['prefix' => '/users', 'as' => 'users.'], function () {
+
+        Route::get('/', [UserController::class, 'index'])->name('index');
+        Route::get('/create', [UserController::class, 'create'])->name('create');
+        Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
+        Route::get('/show/{user}', [UserController::class, 'show'])->name('show');
+        Route::post('/store', [UserController::class, 'store'])->name('store');
+        Route::patch('/update/{user}', [UserController::class, 'update'])->name('update');
+        Route::get('/destroy/{user}', [UserController::class, 'destroy'])->name('destroy');
+
+        Route::group(['prefix' => '/profile', 'as' => 'profile.'], function () {
+            Route::get('/{user}', [UserController::class, 'profile'])->name('index');
+            Route::get('/edit/{user}', [UserController::class, 'profile_edit'])->name('edit');
+        });
     });
 });
 
-Auth::routes(['register' => false, 'reset' => false, 'logout' => false]);
-
+Auth::routes(['reset' => false, 'logout' => false]);
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');

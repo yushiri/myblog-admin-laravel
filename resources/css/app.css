@@ -6,7 +6,7 @@
 
 body {
     @apply relative min-h-screen text-neutral-800;
-    font-family: 'Manrope', sans-serif;
+    font-family: 'Manrope', 'Noto Sans', sans-serif;
 }
 
 .navigation {
@@ -111,7 +111,11 @@ body {
 }
 
 .navigation__profile {
-    @apply w-10 h-10;
+    @apply w-10 h-10 bg-cover;
+}
+
+.navigation__profile__avatar {
+    @apply cursor-pointer hover:scale-105 rounded-[100%] bg-cover bg-no-repeat w-full h-full bg-center;
 }
 
 .navigation__profile_menu {
@@ -120,6 +124,18 @@ body {
 
 .navigation__profile_menu.active {
     @apply opacity-100 scale-100 duration-100;
+}
+
+.container__profile {
+    @apply flex;
+}
+
+.profile__avatar {
+    @apply flex justify-center items-center bg-cover bg-no-repeat bg-center w-[250px] h-[250px];
+}
+
+.profile__info {
+
 }
 
 .content {
