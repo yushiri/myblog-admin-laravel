@@ -36,7 +36,7 @@
                                         {{ $user->email }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $user->role == 1 ? 'guest' ?? $user->role == 2 : 'admin' }}
+                                        {{ $user->role->label() }}
                                     </td>
                                     <td class="table__body-element">
                                         {{ $user->created_at }}

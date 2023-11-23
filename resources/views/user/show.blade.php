@@ -27,7 +27,7 @@
                 PATRONYMIC: {{ $user->patronymic }}
             </div>
             <div>
-                ROLE: {{ $user->role == 1 ? 'guest' ?? $user->role == 2 : 'admin' }}
+                ROLE: {{ $user->role->label() }}
             </div>
         </div>
     </div>

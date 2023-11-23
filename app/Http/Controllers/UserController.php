@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\Role;
 use App\Http\Requests\User\StoreRequest;
 use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
@@ -31,7 +32,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = User::getRoles();
+        $roles = Role::options();
         return view('user.create', compact('roles'));
     }
 
