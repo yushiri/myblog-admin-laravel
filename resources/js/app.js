@@ -22,25 +22,3 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
-document.addEventListener("DOMContentLoaded", () => {
-    function toggleUserMenu() {
-        let userMenu = document.getElementById("userMenu");
-        if (userMenu.classList.contains('active')) {
-            userMenu.classList.remove('active')
-            setTimeout(() => {
-                userMenu.style.display = 'none'
-            }, 200)
-        } else {
-            userMenu.style.display = 'block'
-            setTimeout(() => {
-                userMenu.classList.add('active')
-            }, 10)
-        }
-    }
-
-    document.querySelectorAll("[data-toggle='userMenu']").forEach((item) => {
-        item.addEventListener('click', () => {
-            toggleUserMenu();
-        });
-    });
-});

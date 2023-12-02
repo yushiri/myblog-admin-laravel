@@ -22,11 +22,6 @@ class UserController extends Controller
         return view('user.index', compact('users'));
     }
 
-    public function show(User $user)
-    {
-        return view('user.show', compact('user'));
-    }
-
     /**
      * @return \Illuminate\Contracts\Foundation\Application|Factory|View|Application
      */

@@ -46,7 +46,8 @@
                                     </td>
                                     <td class="table__body-element text-right font-bold flex justify-end items-center">
                                         <a class="mr-2"
-                                           href="{{ route('users.show', [$user]) }}">
+                                           title="Show Profile"
+                                           href="{{ route('users.profile.index', [$user]) }}">
                                             <div class="bg-blue-500 hover:bg-blue-600 duration-100 rounded-md p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 24 24"
@@ -59,7 +60,8 @@
                                             </div>
                                         </a>
                                         <a class="mr-2"
-                                           href="{{ route('users.edit', [$user]) }}">
+                                           href="{{ route('users.edit', [$user]) }}"
+                                           title="Edit User">
                                             <div class="bg-amber-500 hover:bg-amber-600 duration-100 rounded-md p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 24 24"
@@ -71,6 +73,7 @@
                                             </div>
                                         </a>
                                         <a href="{{ route('users.destroy', [$user]) }}"
+                                           title="Delete User"
                                            onclick="return confirm('Удалить пользователя?')">
                                             <div class="bg-red-500 hover:bg-red-800 duration-100 rounded-md p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg"

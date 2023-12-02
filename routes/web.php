@@ -25,7 +25,6 @@ Route::group(['prefix' => '/', 'middleware' => ['setup', 'auth', 'admin']], func
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/create', [UserController::class, 'create'])->name('create');
         Route::get('/edit/{user}', [UserController::class, 'edit'])->name('edit');
-        Route::get('/show/{user}', [UserController::class, 'show'])->name('show');
         Route::post('/store', [UserController::class, 'store'])->name('store');
         Route::patch('/update/{user}', [UserController::class, 'update'])->name('update');
         Route::get('/destroy/{user}', [UserController::class, 'destroy'])->name('destroy');

@@ -8,12 +8,13 @@
     <title>Blog | Admin</title>
     <x-global-app-links/>
 </head>
-<body class="bg-gray-200" x-data="{ menuPadded: $persist(false) }">
+<body class="bg-gray-200" x-data="{ menuPadded: false }">
 <div class="navigation">
     <div class="navigation__wrapper">
         @auth()
             <x-sidebar/>
         @endauth
+
         <div class="navigation__content">
             <div class="navigation__links-wrapper">
                 <a href="#" class="navigation__link font-bold">
@@ -38,7 +39,6 @@
     </div>
 </div>
 <div :class="{ 'content__wrapper': true, 'padded': menuPadded }">
-    {{ Breadcrumbs::render() }}
     @yield('content')
 </div>
 <div class="footer">
@@ -48,3 +48,6 @@
 </div>
 </body>
 </html>
+
+
+{{--style="background-image: url('{{ asset(auth()->user()->avatar_image) }}');"--}}

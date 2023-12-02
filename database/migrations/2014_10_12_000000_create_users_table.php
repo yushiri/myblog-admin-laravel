@@ -20,6 +20,9 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->string('avatar_image')->default('default-profile_01.png');
+            $table->string('header_image')->nullable();
+            $table->string('mobile_number')->nullable();
+            $table->string('location')->nullable();
             $table->unsignedSmallInteger('role')->default(1);
             $table->rememberToken();
             $table->timestamps();
