@@ -12,8 +12,6 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
-
     /**
      * The attributes that are mass assignable.
      *
@@ -26,7 +24,13 @@ class User extends Authenticatable
         'patronymic',
         'password',
         'role',
+        'header_image',
+        'avatar_image',
+        'mobile_number',
+        'location',
     ];
+
+    use HasApiTokens, HasFactory, Notifiable;
 
     /**
      * The attributes that should be hidden for serialization.
@@ -50,6 +54,9 @@ class User extends Authenticatable
     ];
 
 
+    /**
+     * @return Attribute
+     */
     protected function fullName(): Attribute
     {
         return Attribute::make(

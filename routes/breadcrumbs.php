@@ -2,6 +2,7 @@
 
 // Note: Laravel will automatically resolve `Breadcrumbs::` without
 // this import. This is nice for IDE syntax and refactoring.
+use App\Models\Category;
 use App\Models\User;
 use Diglactic\Breadcrumbs\Breadcrumbs;
 
@@ -13,8 +14,9 @@ Breadcrumbs::for('index', function (BreadcrumbTrail $trail) {
     $trail->push('Home', route('index'));
 });
 
-Breadcrumbs::for('users.profile.index', function (BreadcrumbTrail $trail, User $user) {
-    $trail->push('User profile ' . ucfirst($user->name), route('users.show', $user));
+// User
+Breadcrumbs::for('profile.index', function (BreadcrumbTrail $trail, User $user) {
+    $trail->push('User profile ' . ucfirst($user->name));
 });
 
 Breadcrumbs::for('users.index', function (BreadcrumbTrail $trail) {
@@ -35,4 +37,25 @@ Breadcrumbs::for('users.show', function (BreadcrumbTrail $trail, User $user) {
 Breadcrumbs::for('users.edit', function (BreadcrumbTrail $trail, User $user) {
     $trail->parent('users.index');
     $trail->push('Edit ' . $user->name, route('users.edit', $user));
+});
+
+// Category
+Breadcrumbs::for('categories.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('index');
+    $trail->push('Categories', route('categories.index'));
+});
+
+Breadcrumbs::for('categories.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('categories.index');
+    $trail->push('Create', route('categories.create'));
+});
+
+Breadcrumbs::for('categories.show', function (BreadcrumbTrail $trail, Category $category) {
+    $trail->parent('categories.index');
+    $trail->push($category->name, route('categories.show', $category));
+});
+
+Breadcrumbs::for('categories.edit', function (BreadcrumbTrail $trail, Category $category) {
+    $trail->parent('categories.index');
+    $trail->push('Edit ' . $category->name, route('categories.edit', $category));
 });

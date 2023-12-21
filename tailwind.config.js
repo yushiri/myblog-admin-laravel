@@ -4,11 +4,7 @@ export default {
         'resources/views/**/*.blade.php',
         'resources/css/**/*.css',
         'resources/js/**/*.js',
-        'storage/framework/views/*.php'
+        'storage/framework/views/*.php',
     ],
-    theme: {
-        extend: {},
-    },
-    plugins: [],
+    darkMode: 'class',
 }
-

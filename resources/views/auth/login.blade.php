@@ -8,7 +8,7 @@
     <title>Blog | Admin</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="bg-gray-200">
+<body>
 <div class="flex justify-center pt-56">
     <div class="form-container w-1/4">
         <form action="{{ route('login') }}" method="post">

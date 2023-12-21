@@ -1,24 +1,89 @@
-@extends('layouts.profile-page')
+@extends('layouts.app')
 
 @section('content')
-    <div class="container__profile">
-        <div class="bg-white rounded-lg shadow-md pb-8">
-            <x-user-profile-links/>
-            <div class="w-full h-[350px]">
-                <div class="w-full h-full rounded-tl-lg rounded-tr-lg bg-cover bg-no-repeat bg-center"
-                     style="background-image: url('{{ asset('user/headers/'.$user->header_image) }}')"></div>
+    <div x-data="{ editOpen: false }" @keydown.esc="headerOpen = false; avatarOpen = false">
+        <div x-show="headerOpen"
+             class="w-screen h-full fixed z-[60] backdrop-blur-sm bg-opacity-40 bg-neutral-400 bottom-0">
+            <div class="form__blurred-file" @click.away="headerOpen = false">
+                <form action="{{ route('profile.header.update', ['user' => auth()->user()] ) }}"
+                      method="post"
+                      enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
+                    <div class="form__blurred-group">
+                        <div class="space-x-2">
+                            <label class="form__blurred-label" for="header_image">
+                                Select image for profile header
+                            </label>
+                            <input
+                                class="form__blurred-input"
+                                name="header_image"
+                                id="header_image"
+                                type="file"
+                                placeholder="Choose a file">
+                            @error('header_image')
+                            <div class="form-input__error">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                            <input type="submit" value="Submit" class="button button-primary">
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="flex flex-col ps-20 -mt-20">
-                <div class="w-[200px] h-[200px] bg-white bg-cover bg-no-repeat border-4 border-white rounded-full"
-                     style="background-image: url('{{ asset('user/avatars/'.$user->avatar_image) }}');">
-                    <a href="#"
-                       class="rounded-[100%] w-full h-full flex justify-center items-center opacity-0 hover:opacity-50">
-                        <svg fill="#eeeeee"
-                             height="60px"
-                             width="60px"
-                             xmlns="http://www.w3.org/2000/svg"
-                             xmlns:xlink="http://www.w3.org/1999/xlink"
-                             viewBox="0 0 487 487" xml:space="preserve">
+        </div>
+        <div x-show="avatarOpen"
+             class="w-screen h-full fixed z-[60] backdrop-blur-sm bg-opacity-40 bg-neutral-400 bottom-0">
+            <div class="form__blurred-file" @click.away="avatarOpen = false">
+                <form action="{{ route('profile.avatar.update', ['user' => auth()->user()] ) }}"
+                      method="post"
+                      enctype="multipart/form-data">
+                    @csrf
+                    @method('PATCH')
+                    <div class="form__blurred-group">
+                        <div class="space-x-2">
+                            <label class="form__blurred-label" for="avatar_image">
+                                Select image for profile avatar
+                            </label>
+                            <input
+                                class="form__blurred-input"
+                                name="avatar_image"
+                                id="avatar_image"
+                                type="file"
+                                placeholder="Choose a file">
+                            @error('avatar_image')
+                            <div class="form-input__error">
+                                {{ $message }}
+                            </div>
+                            @enderror
+                            <input type="submit" value="Submit" class="button button-primary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="container__profile rounded-lg">
+            <div class="bg-white rounded-lg shadow-md pb-8 dark:bg-neutral-700">
+                <div class="w-full h-[350px] relative">
+                    <div class="flex space-x-4 absolute right-3 top-3 z-50">
+                        <div class="{{ auth()->user()->id === $user->id ? '' : 'hidden'}}">
+                            <x-user-profile-links/>
+                        </div>
+                    </div>
+                    <div class="absolute top-3 left-3 z-50">
+                        <x-previous-page-button/>
+                    </div>
+                    <div class="w-full h-full rounded-t-lg bg-cover bg-no-repeat bg-center"
+                         style="background-image: url('{{ asset(Storage::url($user->header_image)) }}')">
+                        <button x-show="editOpen"
+                                @click="headerOpen = !headerOpen"
+                                class="rounded-t-[5px] w-full h-full flex justify-center items-center opacity-0 hover:opacity-100 outline-0">
+                            <svg fill="#cecece"
+                                 height="60px"
+                                 width="60px"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 viewBox="0 0 487 487" xml:space="preserve">
                         <g>
                             <g>
                                 <path d="M308.1,277.95c0,35.7-28.9,64.6-64.6,64.6s-64.6-28.9-64.6-64.6s28.9-64.6,64.6-64.6S308.1,242.25,308.1,277.95z
@@ -29,107 +94,208 @@
                             </g>
                         </g>
                     </svg>
-                    </a>
+                        </button>
+                    </div>
                 </div>
-                <div class="flex items-center space-x-2 mt-2">
-                    <p class="text-2xl">
-                        {{ join(' ', [ucfirst($user->name), ucfirst($user->surname)]) }}
-                    </p>
-                    <span class="bg-blue-500 rounded-full p-1 {{ $user->role->value === 2 ? '' : 'hidden' }}"
-                          title="Administrator">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="text-gray-100 h-2.5 w-2.5" fill="none"
-                             viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="4"
-                                  d="M5 13l4 4L19 7"></path>
-                        </svg>
-                    </span>
+                <div class="flex flex-col ps-20 -mt-20">
+                    <div
+                        class="w-[200px] h-[200px] bg-white bg-cover bg-no-repeat border-4 border-white rounded-full z-50 dark:border-neutral-700"
+                        style="background-image: url('{{ asset(Storage::url($user->avatar_image)) }}');">
+                        <button x-show="editOpen"
+                                @click="avatarOpen = !avatarOpen"
+                                class="rounded-[100%] w-full h-full flex justify-center items-center opacity-0 hover:opacity-100 outline-0">
+                            <svg fill="#cecece"
+                                 height="60px"
+                                 width="60px"
+                                 xmlns="http://www.w3.org/2000/svg"
+                                 xmlns:xlink="http://www.w3.org/1999/xlink"
+                                 viewBox="0 0 487 487" xml:space="preserve">
+                        <g>
+                            <g>
+                                <path d="M308.1,277.95c0,35.7-28.9,64.6-64.6,64.6s-64.6-28.9-64.6-64.6s28.9-64.6,64.6-64.6S308.1,242.25,308.1,277.95z
+                                 M440.3,116.05c25.8,0,46.7,20.9,46.7,46.7v122.4v103.8c0,27.5-22.3,49.8-49.8,49.8H49.8c-27.5,0-49.8-22.3-49.8-49.8v-103.9
+                                v-122.3l0,0c0-25.8,20.9-46.7,46.7-46.7h93.4l4.4-18.6c6.7-28.8,32.4-49.2,62-49.2h74.1c29.6,0,55.3,20.4,62,49.2l4.3,18.6H440.3z
+                                 M97.4,183.45c0-12.9-10.5-23.4-23.4-23.4c-13,0-23.5,10.5-23.5,23.4s10.5,23.4,23.4,23.4C86.9,206.95,97.4,196.45,97.4,183.45z
+                                 M358.7,277.95c0-63.6-51.6-115.2-115.2-115.2s-115.2,51.6-115.2,115.2s51.6,115.2,115.2,115.2S358.7,341.55,358.7,277.95z"/>
+                            </g>
+                        </g>
+                    </svg>
+                        </button>
+                    </div>
+                    <div class="flex items-center space-x-2 mt-2">
+                        <p class="text-2xl">
+                            {{ join(' ', [ucfirst($user->name), ucfirst($user->surname)]) }}
+                        </p>
+                        <span class="bg-blue-500 rounded-full p-1 {{ $user->role->value === 2 ? '' : 'hidden' }}"
+                              title="Administrator">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="text-gray-100 h-2.5 w-2.5"
+                                 fill="none"
+                                 viewBox="0 0 24 24"
+                                 stroke="currentColor">
+                                <path stroke-linecap="round"
+                                      stroke-linejoin="round"
+                                      stroke-width="4"
+                                      d="M5 13l4 4L19 7"></path>
+                            </svg>
+                        </span>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-50">{{ $user->role->value === 2 ? 'Current administrator' : '' }}</p>
                 </div>
-                <p class="text-gray-700">{{ $user->role->value === 2 ? 'Current administrator' : '' }}</p>
-            </div>
-        </div>
-        <div class="profile__info">
-            <div class="flex-1 bg-white rounded-lg shadow-md p-8 mt-14">
-                <h4 class="text-xl text-gray-900 font-bold">Personal Info</h4>
-                <ul class="mt-2 text-gray-700">
-                    <li class="flex border-y py-2">
-                        <span class="font-bold w-24">Full name:</span>
-                        <span class="text-gray-700">
-                            {{ $user->full_name }}
-                        </span>
-                    </li>
-                    <li class="flex border-b py-2">
-                        <span class="font-bold w-24">Joined:</span>
-                        <span class="text-gray-700">
-                            {{ $user->created_at->format('l, d.m.o | H:i:s') }}
-                        </span>
-                    </li>
-                    <li class="flex border-b py-2">
-                        <span class="font-bold w-24">Mobile:</span>
-                        <span class="text-gray-700">
-                            {{ $user->mobile_number == null ? 'No data' : $user->mobile_number }}
-                        </span>
-                    </li>
-                    <li class="flex border-b py-2">
-                        <span class="font-bold w-24">Email:</span>
-                        <span class="text-gray-700">
-                            {{ $user->email }}
-                        </span>
-                    </li>
-                    <li class="flex border-b py-2">
-                        <span class="font-bold w-24">Location:</span>
-                        <span class="text-gray-700">
-                            {{ $user->location == null ? 'No data' : $user->location }}
-                        </span>
-                    </li>
-                    <li class="flex items-center border-b py-2 space-x-2">
-                        <span class="font-bold w-24">Elsewhere:</span>
-                        <a href="#" title="Facebook">
-                            <svg class="w-5 h-5" id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
-                                 viewBox="0 0 506.86 506.86">
-                                <defs>
-                                    <style>.cls-1 {
-                                            fill: #1877f2;
-                                        }
-
-                                        .cls-2 {
-                                            fill: #fff;
-                                        }</style>
-                                </defs>
-                                <path class="cls-1"
-                                      d="M506.86,253.43C506.86,113.46,393.39,0,253.43,0S0,113.46,0,253.43C0,379.92,92.68,484.77,213.83,503.78V326.69H149.48V253.43h64.35V197.6c0-63.52,37.84-98.6,95.72-98.6,27.73,0,56.73,5,56.73,5v62.36H334.33c-31.49,0-41.3,19.54-41.3,39.58v47.54h70.28l-11.23,73.26H293V503.78C414.18,484.77,506.86,379.92,506.86,253.43Z"></path>
-                                <path class="cls-2"
-                                      d="M352.08,326.69l11.23-73.26H293V205.89c0-20,9.81-39.58,41.3-39.58h31.95V104s-29-5-56.73-5c-57.88,0-95.72,35.08-95.72,98.6v55.83H149.48v73.26h64.35V503.78a256.11,256.11,0,0,0,79.2,0V326.69Z"></path>
-                            </svg>
-                        </a>
-                        <a href="#" title="Twitter">
-                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 333333 333333"
-                                 shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
-                                 image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
-                                <path
-                                    d="M166667 0c92048 0 166667 74619 166667 166667s-74619 166667-166667 166667S0 258715 0 166667 74619 0 166667 0zm90493 110539c-6654 2976-13822 4953-21307 5835 7669-4593 13533-11870 16333-20535-7168 4239-15133 7348-23574 9011-6787-7211-16426-11694-27105-11694-20504 0-37104 16610-37104 37101 0 2893 320 5722 949 8450-30852-1564-58204-16333-76513-38806-3285 5666-5022 12109-5022 18661v4c0 12866 6532 24246 16500 30882-6083-180-11804-1876-16828-4626v464c0 17993 12789 33007 29783 36400-3113 845-6400 1313-9786 1313-2398 0-4709-247-7007-665 4746 14736 18448 25478 34673 25791-12722 9967-28700 15902-46120 15902-3006 0-5935-184-8860-534 16466 10565 35972 16684 56928 16684 68271 0 105636-56577 105636-105632 0-1630-36-3209-104-4806 7251-5187 13538-11733 18514-19185l17-17-3 2z"
-                                    fill="#1da1f2"></path>
-                            </svg>
-                        </a>
-                        <a href="#" title="LinkedIn">
-                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 333333 333333"
-                                 shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
-                                 image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd">
-                                <path
-                                    d="M166667 0c92048 0 166667 74619 166667 166667s-74619 166667-166667 166667S0 258715 0 166667 74619 0 166667 0zm-18220 138885h28897v14814l418 1c4024-7220 13865-14814 28538-14814 30514-1 36157 18989 36157 43691v50320l-30136 1v-44607c0-10634-221-24322-15670-24322-15691 0-18096 11575-18096 23548v45382h-30109v-94013zm-20892-26114c0 8650-7020 15670-15670 15670s-15672-7020-15672-15670 7022-15670 15672-15670 15670 7020 15670 15670zm-31342 26114h31342v94013H96213v-94013z"
-                                    fill="#0077b5"></path>
-                            </svg>
-                        </a>
-                        <a href="#" title="Github">
-                            <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="0" height="0"
-                                 shape-rendering="geometricPrecision" text-rendering="geometricPrecision"
-                                 image-rendering="optimizeQuality" fill-rule="evenodd" clip-rule="evenodd"
-                                 viewBox="0 0 640 640">
-                                <path
-                                    d="M319.988 7.973C143.293 7.973 0 151.242 0 327.96c0 141.392 91.678 261.298 218.826 303.63 16.004 2.964 21.886-6.957 21.886-15.414 0-7.63-.319-32.835-.449-59.552-89.032 19.359-107.8-37.772-107.8-37.772-14.552-36.993-35.529-46.831-35.529-46.831-29.032-19.879 2.209-19.442 2.209-19.442 32.126 2.245 49.04 32.954 49.04 32.954 28.56 48.922 74.883 34.76 93.131 26.598 2.882-20.681 11.15-34.807 20.315-42.803-71.08-8.067-145.797-35.516-145.797-158.14 0-34.926 12.52-63.485 32.965-85.88-3.33-8.078-14.291-40.606 3.083-84.674 0 0 26.87-8.61 88.029 32.8 25.512-7.075 52.878-10.642 80.056-10.76 27.2.118 54.614 3.673 80.162 10.76 61.076-41.386 87.922-32.8 87.922-32.8 17.398 44.08 6.485 76.631 3.154 84.675 20.516 22.394 32.93 50.953 32.93 85.879 0 122.907-74.883 149.93-146.117 157.856 11.481 9.921 21.733 29.398 21.733 59.233 0 42.792-.366 77.28-.366 87.804 0 8.516 5.764 18.473 21.992 15.354 127.076-42.354 218.637-162.274 218.637-303.582 0-176.695-143.269-319.988-320-319.988l-.023.107z"></path>
-                            </svg>
-                        </a>
-                    </li>
-                </ul>
+                <hr class="my-10 mx-20 dark:border-neutral-800">
+                <div class="profile__info items-center px-20">
+                    <div class="flex-1 bg-white dark:bg-neutral-700">
+                        <div class="w-full flex justify-between items-center mb-8">
+                            <h4 x-show="!editOpen" class="text-xl text-gray-900 font-bold dark:text-gray-50">
+                                Personal Info
+                            </h4>
+                            <h4 x-show="editOpen" class="text-xl text-gray-900 font-bold dark:text-gray-50">
+                                Edit personal info
+                            </h4>
+                        </div>
+                        <ul x-show="!editOpen" class="mt-2 text-gray-700 dark:bg-neutral-700 dark:text-gray-50">
+                            <li class="flex border-y py-2 dark:border-neutral-800">
+                                <span class="font-bold w-24">Full name:</span>
+                                <span class="text-gray-700 dark:text-gray-50">
+                                    {{ $user->full_name }}
+                                </span>
+                            </li>
+                            <li class="flex border-b py-2 dark:border-neutral-800">
+                                <span class="font-bold w-24">Joined:</span>
+                                <span class="text-gray-700 dark:text-gray-50">
+                                    {{ $user->created_at->format('l, d.m.o | H:i:s') }}
+                                </span>
+                            </li>
+                            <li class="flex border-b py-2 dark:border-neutral-800">
+                                <span class="font-bold w-24">Mobile:</span>
+                                <span class="text-gray-700 dark:text-gray-50">
+                                    {{ $user->mobile_number == null ? 'No data' : $user->mobile_number }}
+                                </span>
+                            </li>
+                            <li class="flex border-b py-2 dark:border-neutral-800">
+                                <span class="font-bold w-24">Email:</span>
+                                <span class="text-gray-700 dark:text-gray-50">
+                                    {{ $user->email }}
+                                </span>
+                            </li>
+                            <li class="flex border-b py-2 dark:border-neutral-800">
+                                <span class="font-bold w-24">Location:</span>
+                                <span class="text-gray-700 dark:text-gray-50">
+                                    {{ $user->location == null ? 'No data' : $user->location }}
+                                </span>
+                            </li>
+                        </ul>
+                        <div x-show="editOpen" class="form-container">
+                            <form action="{{ route('profile.personal.update', compact('user')) }}"
+                                  method="post" id="formForUserData">
+                                @csrf
+                                @method('PATCH')
+                                <div class="form-group ">
+                                    <div class="form-input">
+                                        <label class="form-input__label" for="name">
+                                            Name
+                                        </label>
+                                        <input class="form-input__input"
+                                               name="name"
+                                               id="name"
+                                               type="text"
+                                               value="{{ $user->name }}"
+                                               placeholder="Name">
+                                        @error('name')
+                                        <div class="form-input__error">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-input">
+                                        <label class="form-input__label" for="surname">
+                                            Surname
+                                        </label>
+                                        <input class="form-input__input"
+                                               name="surname"
+                                               id="surname"
+                                               type="text"
+                                               value="{{ $user->surname }}"
+                                               placeholder="Surname">
+                                        @error('surname')
+                                        <div class="form-input__error">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-input">
+                                        <label class="form-input__label" for="patronymic">
+                                            Patronymic
+                                        </label>
+                                        <input class="form-input__input"
+                                               name="patronymic"
+                                               id="patronymic"
+                                               type="text"
+                                               value="{{ $user->patronymic }}"
+                                               placeholder="Patronymic">
+                                        @error('patronymic')
+                                        <div class="form-input__error">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="form-input">
+                                        <label class="form-input__label" for="email">
+                                            Email
+                                        </label>
+                                        <input class="form-input__input"
+                                               name="email"
+                                               id="email"
+                                               type="email"
+                                               value="{{ $user->email }}"
+                                               placeholder="Email">
+                                        @error('email')
+                                        <div class="form-input__error">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-input">
+                                        <label class="form-input__label" for="email">
+                                            Mobile Number
+                                        </label>
+                                        <input class="form-input__input"
+                                               name="mobile_number"
+                                               id="mobile_number"
+                                               type="tel"
+                                               pattern="^(\+7|7|8)?[\s\-]?\(?[489][0-9]{2}\)?[\s\-]?[0-9]{3}[\s\-]?[0-9]{2}[\s\-]?[0-9]{2}$"
+                                               value="{{ $user->mobile_number }}"
+                                               placeholder="Mobile Number">
+                                        @error('mobile')
+                                        <div class="form-input__error">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                    <div class="form-input">
+                                        <label class="form-input__label" for="role">
+                                            Location
+                                        </label>
+                                        <select id="dadata" name="location">
+                                            <option selected>{{ $user->location }}</option>
+                                        </select>
+                                        @error('location')
+                                        <div class="form-input__error">
+                                            {{ $message }}
+                                        </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="flex justify-end mt-6">
+                                    <input type="hidden" name="user_id" value="{{ $user->id }}">
+                                    <input class="button button-primary cursor-pointer" type="submit" value="Save">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -2,6 +2,7 @@
 
 @section('content')
     <div class="content">
+        <x-previous-page-button/>
         <div>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab blanditiis consectetur debitis dignissimos
             doloremque, doloribus error est expedita explicabo impedit, incidunt itaque iusto magnam magni molestias
