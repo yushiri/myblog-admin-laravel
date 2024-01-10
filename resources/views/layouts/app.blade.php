@@ -29,17 +29,32 @@
         @endauth
     </div>
 </div>
-<div x-data="{ headerOpen: false, avatarOpen: false }"
-     :class="{ 'content__wrapper': true, 'padded': menuPadded, 'blurred': headerOpen + avatarOpen }">
-    @if(Route::currentRouteName() != 'profile.index' )
-        {{ Breadcrumbs::render() }}
-    @endif
-    @yield('content')
-</div>
-<div :class="{ 'footer': true, 'padded': menuPadded }">
-    <div class="footer__wrapper">
-        Footer
+@auth()
+    <div x-data="{ headerOpen: false, avatarOpen: false }"
+         :class="{ 'content__wrapper': true, 'padded': menuPadded, 'blurred': headerOpen + avatarOpen }">
+        <x-breadcrumbs/>
+        @yield('content')
     </div>
-</div>
+@endauth
+@guest()
+    <div class="content__wrapper">
+        <x-breadcrumbs/>
+        @yield('content')
+    </div>
+@endguest
+@auth()
+    <div :class="{ 'footer': true, 'padded': menuPadded }">
+        <div class="footer__wrapper">
+            Footer
+        </div>
+    </div>
+@endauth
+@guest()
+    <div class="footer">
+        <div class="footer__wrapper">
+            Footer
+        </div>
+    </div>
+@endguest
 </body>
 </html>

@@ -16,7 +16,7 @@
                                 Select image for profile header
                             </label>
                             <input
-                                class="form__blurred-input"
+                                class="form__file-input"
                                 name="header_image"
                                 id="header_image"
                                 type="file"
@@ -46,7 +46,7 @@
                                 Select image for profile avatar
                             </label>
                             <input
-                                class="form__blurred-input"
+                                class="form__file-input"
                                 name="avatar_image"
                                 id="avatar_image"
                                 type="file"

@@ -5,8 +5,8 @@
         <div class="flex justify-between">
             <x-previous-page-button/>
             <div class="flex justify-end mb-6">
-                <a href="{{ route('categories.create') }}" class="button button-primary">
-                    Add Category
+                <a href="{{ route('tags.create') }}" class="button button-primary">
+                    Add Tag
                 </a>
             </div>
         </div>
@@ -25,24 +25,24 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $category)
+                            @foreach($tags as $tag)
                                 <tr class="table__row">
                                     <td class="table__body-element">
-                                        {{ $category->id }}
+                                        {{ $tag->id }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $category->name }}
+                                        {{ $tag->name }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $category->created_at }}
+                                        {{ $tag->created_at }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $category->updated_at }}
+                                        {{ $tag->updated_at }}
                                     </td>
                                     <td class="table__body-element text-right font-bold flex justify-end items-center">
                                         <a class="mr-2"
-                                           href="{{ route('categories.edit', [$category]) }}"
-                                           title="Edit Category">
+                                           href="{{ route('tags.edit', [$tag]) }}"
+                                           title="Edit Tag">
                                             <div class="bg-amber-500 hover:bg-amber-600 duration-100 rounded-md p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 24 24"
@@ -54,9 +54,9 @@
                                                 </svg>
                                             </div>
                                         </a>
-                                        <a href="{{ route('categories.destroy', [$category]) }}"
-                                           title="Delete Category"
-                                           onclick="return confirm('Delete category {{ $category->name }}?')">
+                                        <a href="{{ route('tags.destroy', [$tag]) }}"
+                                           title="Delete Tag"
+                                           onclick="return confirm('Delete tag {{ $tag->name }}?')">
                                             <div class="bg-red-500 hover:bg-red-800 duration-100 rounded-md p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 24 24"

@@ -1,11 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
-use App\Enums\Role;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Category\StoreRequest;
-use App\Http\Requests\Category\UpdateRequest;
+use App\Http\Requests\Api\Category\StoreRequest;
+use App\Http\Requests\Api\Category\UpdateRequest;
 use App\Models\Category;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -28,8 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $roles = Role::options();
-        return view('api.category.create', compact('roles'));
+        return view('api.category.create');
     }
 
     /**

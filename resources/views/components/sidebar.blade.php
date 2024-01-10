@@ -71,12 +71,12 @@
             </div>
             <div x-show="open" class="p-1 ps-14">
                 <ul class="text-gray-500 text-start">
-                    <a href="{{ route('users.index') }}">
+                    <a href="{{ route('tags.index') }}">
                         <li class="sidebar__link-down">
                             Tags List
                         </li>
                     </a>
-                    <a href="{{ route('users.create') }}">
+                    <a href="{{ route('tags.create') }}">
                         <li class="sidebar__link-down">
                             Add Tag
                         </li>
@@ -95,12 +95,12 @@
             </div>
             <div x-show="open" class="p-1 ps-14">
                 <ul class="text-gray-500 text-start">
-                    <a href="{{ route('users.index') }}">
+                    <a href="{{ route('posts.index') }}">
                         <li class="sidebar__link-down">
                             Posts List
                         </li>
                     </a>
-                    <a href="{{ route('users.create') }}">
+                    <a href="{{ route('posts.create') }}">
                         <li class="sidebar__link-down">
                             Add Post
                         </li>

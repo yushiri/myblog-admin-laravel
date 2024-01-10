@@ -5,8 +5,8 @@
         <div class="flex justify-between">
             <x-previous-page-button/>
             <div class="flex justify-end mb-6">
-                <a href="{{ route('categories.create') }}" class="button button-primary">
-                    Add Category
+                <a href="{{ route('posts.create') }}" class="button button-primary">
+                    Add Post
                 </a>
             </div>
         </div>
@@ -18,31 +18,31 @@
                             <thead class="table__head bg-gray-400 dark:bg-neutral-900">
                             <tr>
                                 <th class="text-left text-neutral-900 dark:text-gray-50">ID</th>
-                                <th class="text-left text-neutral-900 dark:text-gray-50">Name</th>
+                                <th class="text-left text-neutral-900 dark:text-gray-50">Title</th>
                                 <th class="text-left text-neutral-900 dark:text-gray-50">Created Date</th>
                                 <th class="text-left text-neutral-900 dark:text-gray-50">Updated Date</th>
                                 <th class="text-right text-neutral-900 dark:text-gray-50">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $category)
+                            @foreach($posts as $post)
                                 <tr class="table__row">
                                     <td class="table__body-element">
-                                        {{ $category->id }}
+                                        {{ $post->id }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $category->name }}
+                                        {{ $post->title }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $category->created_at }}
+                                        {{ $post->created_at }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $category->updated_at }}
+                                        {{ $post->updated_at }}
                                     </td>
                                     <td class="table__body-element text-right font-bold flex justify-end items-center">
                                         <a class="mr-2"
-                                           href="{{ route('categories.edit', [$category]) }}"
-                                           title="Edit Category">
+                                           href="{{ route('posts.edit', [$post]) }}"
+                                           title="Edit Post">
                                             <div class="bg-amber-500 hover:bg-amber-600 duration-100 rounded-md p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 24 24"
@@ -54,9 +54,9 @@
                                                 </svg>
                                             </div>
                                         </a>
-                                        <a href="{{ route('categories.destroy', [$category]) }}"
-                                           title="Delete Category"
-                                           onclick="return confirm('Delete category {{ $category->name }}?')">
+                                        <a href="{{ route('posts.destroy', [$post]) }}"
+                                           title="Delete Post"
+                                           onclick="return confirm('Delete post {{ $post->name }}?')">
                                             <div class="bg-red-500 hover:bg-red-800 duration-100 rounded-md p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 24 24"

@@ -134,7 +134,7 @@ body {
 }
 
 .breadcrumbs {
-    @apply container mx-auto transition-all duration-200;
+    @apply container mx-auto transition-all;
 }
 
 .breadcrumbs.padded {
@@ -330,11 +330,13 @@ body {
     @apply dark:text-gray-50;
 }
 
-.form__blurred-input {
+.form__file-input {
     @apply h-[36px] rounded-lg file:border-l-0 file:border-t-0 file:border-b-0 file:border-r text-gray-500;
-    @apply file:text-base border-2 p-1.5 file:bg-gray-100 border-none bg-gray-100 focus:outline-none;
-    @apply shadow-sm shadow-neutral-900 file:shadow-sm file:shadow-neutral-800 file:rounded-md;
-    @apply dark:bg-neutral-800 dark:file:bg-neutral-700 dark:file:text-gray-50 dark:text-gray-50;
+    @apply file:text-base border-2 p-1.5 border-none focus:outline-none file:hover:cursor-pointer;
+    @apply file:bg-gray-200 bg-white file:shadow-sm file:shadow-gray-200 shadow-neutral-200;
+    @apply shadow-sm dark:shadow-neutral-800 dark:file:shadow-neutral-800 file:rounded-md;
+    @apply dark:bg-neutral-700 dark:file:bg-neutral-800 dark:file:text-gray-50 dark:text-gray-50;
+    user-select: none;
 }
 
 .choices__inner {

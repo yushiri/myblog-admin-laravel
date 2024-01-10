@@ -79,7 +79,7 @@
                                         </a>
                                         <a href="{{ route('users.destroy', [$user]) }}"
                                            title="Delete User"
-                                           onclick="return confirm('Удалить пользователя?')">
+                                           onclick="return confirm('Delete user {{ $user->name }}?')">
                                             <div class="bg-red-500 hover:bg-red-800 duration-100 rounded-md p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 24 24"

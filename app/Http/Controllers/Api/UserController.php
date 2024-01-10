@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\api;
+namespace App\Http\Controllers\Api;
 
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\Users\StoreRequest;
+use App\Http\Requests\Api\Users\UpdateRequest;
 use App\Http\Requests\User\Profile\AvatarUpdateRequest;
 use App\Http\Requests\User\Profile\HeaderUpdateRequest;
 use App\Http\Requests\User\Profile\PersonalUpdateRequest;
-use App\Http\Requests\User\StoreRequest;
-use App\Http\Requests\User\UpdateRequest;
 use App\Models\User;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -42,7 +42,7 @@ class UserController extends Controller
     public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        User::create($data);
+        User::firstOrCreate($data);
         return redirect()->route('users.index');
     }
 
