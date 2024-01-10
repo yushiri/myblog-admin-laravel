@@ -34,17 +34,22 @@ class PostController extends Controller
 
     /**
      * @param StoreRequest $request
-     * @param Post $post
-     * @param Image $image
      * @return RedirectResponse
      */
-    public function store(StoreRequest $request, Post $post, Image $image)
+    public function store(StoreRequest $request)
     {
         $data = $request->validated();
-        $previewImagePath = $request->file('preview_image')?->store('preview_image', ['disk' => 'public']);
-        $post->update([$data, 'preview_image' => $previewImagePath]);
-        $ImagesPath = $request->file('images[]')?->store('images', ['disk' => 'public']);
-        $image->update(['path' => $ImagesPath]);
+        $previewImagePath = $request->file('preview_image')->store('preview_image', ['disk' => 'public']);
+        $post = Post::create([
+            ...$data,
+            'user_id' => auth()->id(),
+            'preview_image' => $previewImagePath
+        ]);
+
+        foreach ($request->file('images') as $file) {
+            $imagePath = $file->store('images', ['disk' => 'public']);
+            $post->images()->create(['path' => $imagePath]);
+        }
 
         return redirect()->route('posts.index');
     }
