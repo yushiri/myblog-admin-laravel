@@ -8,27 +8,25 @@
     <title>Blog | Admin</title>
     <x-global-app-links/>
 </head>
-<body data-theme-container :class="{'dark': dark}">
+<body data-theme-container :class="{'dark': dark}" x-data="{ menuPadded: $persist(false) }">
 <div class="preloader">
     <div class="loader"></div>
 </div>
 <div class="navigation">
-    <div class="navigation__wrapper">
-        <x-nav-links/>
-        <x-toggle-theme-button/>
-        @guest
-            <a href="{{ route('login') }}" class="button button-primary">Login</a>
-        @endguest
-        @auth
+    <div class="navigation__wrapper flex justify-between">
+        <x-sidebar/>
+        <div class="flex-grow flex space-x-10 justify-end container">
+            <x-toggle-theme-button/>
             <x-nav-user-menu/>
-        @endauth
+        </div>
     </div>
 </div>
-<div class="content__wrapper">
+<div x-data="{ headerOpen: false, avatarOpen: false }"
+     :class="{ 'content__wrapper': true, 'padded': menuPadded, 'blurred': headerOpen + avatarOpen }">
     <x-breadcrumbs/>
     @yield('content')
 </div>
-<div class="footer">
+<div :class="{ 'footer': true, 'padded': menuPadded }">
     <div class="footer__wrapper">
         Footer
     </div>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Post\StoreRequest;
@@ -21,7 +21,12 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('api.post.index', compact('posts'));
+        return view('admin.post.index', compact('posts'));
+    }
+
+    public function show(Post $post)
+    {
+        return view('admin.post', compact('post'));
     }
 
     /**
@@ -29,7 +34,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('api.post.create');
+        return view('admin.post.create');
     }
 
     /**
@@ -56,7 +61,7 @@ class PostController extends Controller
 
     public function edit(Post $post)
     {
-        return view('api.post.edit', compact('post'));
+        return view('admin.post.edit', compact('post'));
     }
 
     public function update(UpdateRequest $request, Post $post)

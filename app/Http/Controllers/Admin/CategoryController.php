@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Category\StoreRequest;
@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('api.category.index', compact('categories'));
+        return view('admin.category.index', compact('categories'));
     }
 
     /**
@@ -27,7 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('api.category.create');
+        return view('admin.category.create');
     }
 
     /**
@@ -43,7 +43,7 @@ class CategoryController extends Controller
 
     public function edit(Category $category)
     {
-        return view('api.category.edit', compact('category'));
+        return view('admin.category.edit', compact('category'));
     }
 
     public function update(UpdateRequest $request, Category $category)

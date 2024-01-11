@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
 use App\Enums\Role;
 use App\Http\Controllers\Controller;
@@ -23,7 +23,7 @@ class UserController extends Controller
     public function index()
     {
         $users = User::all();
-        return view('api.user.index', compact('users'));
+        return view('admin.user.index', compact('users'));
     }
 
     /**
@@ -32,7 +32,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::options();
-        return view('api.user.create', compact('roles'));
+        return view('admin.user.create', compact('roles'));
     }
 
     /**
@@ -52,7 +52,7 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        return view('api.user.edit', compact('user'));
+        return view('admin.user.edit', compact('user'));
     }
 
     /**

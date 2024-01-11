@@ -9,7 +9,7 @@
          class="menu__wrapper"
          style="display: none;">
         <div class="border-b dark:border-neutral-800">
-            <a href="{{ route('profile.index', [auth()->user()]) }}"
+            <a href="{{ route('profile.show', [auth()->user()]) }}"
                class="menu__link">
                 <span class="text-sm text-gray-700 dark:text-gray-50">Your Profile</span>
             </a>

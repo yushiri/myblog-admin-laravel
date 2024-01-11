@@ -1,3 +1,3 @@
-@if(Route::currentRouteName() != 'profile.index' )
+@if(Route::currentRouteName() != 'profile.show' )
     {{ Breadcrumbs::render() }}
 @endif

@@ -1,12 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
     <div class="content">
         <div class="flex justify-between">
             <x-previous-page-button/>
             <div class="flex justify-end mb-6">
-                <a href="{{ route('categories.create') }}" class="button button-primary">
-                    Add Category
+                <a href="{{ route('users.create') }}" class="button button-primary">
+                    Add User
                 </a>
             </div>
         </div>
@@ -19,30 +19,53 @@
                             <tr>
                                 <th class="text-left text-neutral-900 dark:text-gray-50">ID</th>
                                 <th class="text-left text-neutral-900 dark:text-gray-50">Name</th>
+                                <th class="text-left text-neutral-900 dark:text-gray-50">Email</th>
+                                <th class="text-left text-neutral-900 dark:text-gray-50">Role</th>
                                 <th class="text-left text-neutral-900 dark:text-gray-50">Created Date</th>
                                 <th class="text-left text-neutral-900 dark:text-gray-50">Updated Date</th>
                                 <th class="text-right text-neutral-900 dark:text-gray-50">Actions</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach($categories as $category)
+                            @foreach($users as $user)
                                 <tr class="table__row">
                                     <td class="table__body-element">
-                                        {{ $category->id }}
+                                        {{ $user->id }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $category->name }}
+                                        {{ $user->full_name }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $category->created_at }}
+                                        {{ $user->email }}
                                     </td>
                                     <td class="table__body-element">
-                                        {{ $category->updated_at }}
+                                        {{ $user->role->label() }}
+                                    </td>
+                                    <td class="table__body-element">
+                                        {{ $user->created_at }}
+                                    </td>
+                                    <td class="table__body-element">
+                                        {{ $user->updated_at }}
                                     </td>
                                     <td class="table__body-element text-right font-bold flex justify-end items-center">
                                         <a class="mr-2"
-                                           href="{{ route('categories.edit', [$category]) }}"
-                                           title="Edit Category">
+                                           title="Show Profile"
+                                           href="{{ route('profile.show', [$user]) }}">
+                                            <div class="bg-blue-500 hover:bg-blue-600 duration-100 rounded-md p-1">
+                                                <svg xmlns="http://www.w3.org/2000/svg"
+                                                     viewBox="0 0 24 24"
+                                                     fill="white"
+                                                     width="20"
+                                                     height="20">
+                                                    <path d="M15.5 12a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"></path>
+                                                    <path
+                                                        d="M12 3.5c3.432 0 6.124 1.534 8.054 3.241 1.926 1.703 3.132 3.61 3.616 4.46a1.6 1.6 0 0 1 0 1.598c-.484.85-1.69 2.757-3.616 4.461-1.929 1.706-4.622 3.24-8.054 3.24-3.432 0-6.124-1.534-8.054-3.24C2.02 15.558.814 13.65.33 12.8a1.6 1.6 0 0 1 0-1.598c.484-.85 1.69-2.757 3.616-4.462C5.875 5.034 8.568 3.5 12 3.5ZM1.633 11.945a.115.115 0 0 0-.017.055c.001.02.006.039.017.056.441.774 1.551 2.527 3.307 4.08C6.691 17.685 9.045 19 12 19c2.955 0 5.31-1.315 7.06-2.864 1.756-1.553 2.866-3.306 3.307-4.08a.111.111 0 0 0 .017-.056.111.111 0 0 0-.017-.056c-.441-.773-1.551-2.527-3.307-4.08C17.309 6.315 14.955 5 12 5 9.045 5 6.69 6.314 4.94 7.865c-1.756 1.552-2.866 3.306-3.307 4.08Z"></path>
+                                                </svg>
+                                            </div>
+                                        </a>
+                                        <a class="mr-2"
+                                           href="{{ route('users.edit', [$user]) }}"
+                                           title="Edit User">
                                             <div class="bg-amber-500 hover:bg-amber-600 duration-100 rounded-md p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 24 24"
@@ -54,9 +77,9 @@
                                                 </svg>
                                             </div>
                                         </a>
-                                        <a href="{{ route('categories.destroy', [$category]) }}"
-                                           title="Delete Category"
-                                           onclick="return confirm('Delete category {{ $category->name }}?')">
+                                        <a href="{{ route('users.destroy', [$user]) }}"
+                                           title="Delete User"
+                                           onclick="return confirm('Delete user {{ $user->name }}?')">
                                             <div class="bg-red-500 hover:bg-red-800 duration-100 rounded-md p-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg"
                                                      viewBox="0 0 24 24"

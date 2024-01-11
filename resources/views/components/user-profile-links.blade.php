@@ -18,20 +18,20 @@
                     <span class="text-sm text-gray-700 dark:text-gray-50">Edit Profile</span>
                 </button>
             </div>
-            <a x-show="editOpen" href="{{ route('profile.index', auth()->user()) }}"
+            <a x-show="editOpen" href="{{ route('profile.show', auth()->user()) }}"
                class="menu__link"
                @click="$persist(editOpen = !editOpen)">
                 <span class="text-sm text-gray-700 dark:text-gray-50">Back to Profile</span>
             </a>
         </div>
         <div class="border-b dark:border-neutral-800">
-            <a href="{{ route('profile.index', [auth()->user()]) }}"
+            <a href="{{ route('profile.show', [auth()->user()]) }}"
                class="menu__link">
                 <span class="text-sm text-gray-700 dark:text-gray-50">Change password</span>
             </a>
         </div>
         <div>
-            <a href="{{ route('profile.index', [auth()->user()]) }}"
+            <a href="{{ route('profile.show', [auth()->user()]) }}"
                class="menu__link">
                 <span class="text-sm text-red-700 dark:text-red-500">Delete Account</span>
             </a>

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\Tag\StoreRequest;
@@ -19,7 +19,7 @@ class TagController extends Controller
     public function index()
     {
         $tags = Tag::all();
-        return view('api.tag.index', compact('tags'));
+        return view('admin.tag.index', compact('tags'));
     }
 
     /**
@@ -27,7 +27,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('api.tag.create');
+        return view('admin.tag.create');
     }
 
     /**
@@ -43,7 +43,7 @@ class TagController extends Controller
 
     public function edit(Tag $tag)
     {
-        return view('api.tag.edit', compact('tag'));
+        return view('admin.tag.edit', compact('tag'));
     }
 
     public function update(UpdateRequest $request, Tag $tag)

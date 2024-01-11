@@ -16,10 +16,14 @@ Breadcrumbs::for('index', function (BreadcrumbTrail $trail) {
     $trail->push('Home', route('index'));
 });
 
+Breadcrumbs::for('admin.index', function (BreadcrumbTrail $trail) {
+    $trail->push('Home', route('admin.index'));
+});
+
 /**
  * User
  */
-Breadcrumbs::for('profile.index', function (BreadcrumbTrail $trail, User $user) {
+Breadcrumbs::for('profile.show', function (BreadcrumbTrail $trail, User $user) {
     $trail->push('User profile ' . ucfirst($user->name));
 });
 
